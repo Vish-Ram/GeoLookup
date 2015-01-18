@@ -1,4 +1,4 @@
-package com.vish.geolookup;
+package com.vish.geolookupcache;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;

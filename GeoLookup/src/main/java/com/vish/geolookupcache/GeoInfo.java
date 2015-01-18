@@ -1,4 +1,4 @@
-package com.vish.geolookup;
+package com.vish.geolookupcache;
 
 import java.util.List;
 

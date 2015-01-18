@@ -1,4 +1,4 @@
-package com.vish.geolookup;
+package com.vish.geolookupcache;
 
 public class NearestGeoPoint {
 	private Location location;
