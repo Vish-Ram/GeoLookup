@@ -79,10 +79,7 @@ public class GenerateLookupCache {
   //lat = 16-bit msb of 306786429 >> 16 = 4681 -> 46.81
   //lon = 16-bit lsb of 306786429 & (2^16)-1 = 12413 -> 124.13 (negative denoted by flag)
 
-  //encoded index with flag: 106358
-  //16th bit = (106358 >> 16) & 1 = 1 (negative flag for lon)
-  //17th bit = (106538 >> 17) & 1 = 0 (positive flag for lat)
-  //index = 16-bit lsb = 106358 & (2^16)-1 = 40822
+ 
   public static void generateGeoPtTxtFile(int startLat, int startLon, int endLat, int endLon, DefaultHttpClient httpClient, HttpPost postRequest, String fileName) {
     FileWriter writer = null;
     try {
@@ -102,36 +99,21 @@ public class GenerateLookupCache {
       //iterates through longitude range for each latitude
       lon = startLon;
       while (lon <= endLon) {
-        //checks whether latitude and/or longitude are/is negative
-        boolean negativeLat = false;
-        if (lat < 0) {
-          negativeLat = true ;
-        }
-        boolean negativeLon = false;
-        if (lon < 0) {
-          negativeLon = true ;
-        }
         //processes current latitude and longitude to find the closest ZIP area in a radius of 20km
         NearestGeoPoint pt = processPoint(lat, lon, "20km", postRequest, httpClient);
         if (pt != null) {
           esSuccessCount++;
 
           //encoded lat/lon key
-          Integer key = (Math.abs(lat) << 16) + Math.abs(lon);
+          Integer key = (lat << 16) + lon;
 
           //index of lat/lon that corresponds to ZIP area
           Integer index = Integer.valueOf(pt.getIndex());
-
-          //flagValue = 0 if both positive; 1 if longitude negative; 2 if both negative
-          //for cases of the US, latitude is always positive and longitude always negative
-          int flagValue = ((negativeLat ? 1 : 0) << 1 ) + (negativeLon ? 1 : 0);
           
-          //left shifts flag value by 16 bytes and adds index to it
-          Integer value = (Math.abs(flagValue) << 16) + Math.abs(index);
           try {
             //writes key and index values to file
             writer.append(key+",");
-            writer.append(String.valueOf(value));
+            writer.append(String.valueOf(index));
             writer.append("\n");
           } catch(IOException e) {
             System.out.println("Could not add record to text");
