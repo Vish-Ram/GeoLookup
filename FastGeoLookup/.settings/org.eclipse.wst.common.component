@@ -2,7 +2,7 @@
     <wb-module deploy-name="FastGeoLookup">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <property name="context-root" value="RESTfulExample"/>
         <property name="java-output-path" value="/FastGeoLookup/target/classes"/>
+        <property name="context-root" value="FastGeoLookup"/>
     </wb-module>
 </project-modules>
