@@ -2,10 +2,17 @@
 
 Preliminary version.
 Version 0.9
+
+Author : Vish Ramamurthy
+
+## Note
+
+This is a reference implementation, adapted from the following blog https://www.paypal-engineering.com/2015/01/29/implementing-a-fast-and-light-weight-geo-lookup-service/
+
+I am not the owner of the above blog. I am providing a reference implementation.
+
+
 ## **Brief description**
-
-
-This is an reference implementation, adapted from the following blog: https://www.paypal-engineering.com/2015/01/29/implementing-a-fast-and-light-weight-geo-lookup-service/
 
 Geo lookup is commonly required feature used by many websites and applications. Most smartphone applications can send latitude and longitude to server applications. Server applications use the latitude and longitude to perform geo lookup. Geo lookup falls into 2 categories:
 
